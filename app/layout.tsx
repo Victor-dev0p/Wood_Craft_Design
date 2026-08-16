@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Outfit } from "next/font/google";
+import { ThemeProvider } from "@/components/ThemeContext";
+import { CartProvider } from "@/components/CartContext";
+import { themeInitScript } from "@/components/styles";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import CartDrawer from "@/components/CartDrawer";
 import "./globals.css";
 
 const display = Cormorant_Garamond({
@@ -27,13 +31,32 @@ export const metadata: Metadata = {
     "Bespoke, hand-jointed solid wood tables, seating, and storage. Sculpted in Portland from certified sustainable old-growth woods.",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" className={`${display.variable} ${sans.variable}`}>
-      <body className="min-h-screen bg-ink text-cream antialiased">
-        <Header />
-        <main>{children}</main>
-        <Footer />
+    <html
+      lang="en"
+      className={`${display.variable} ${sans.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
+      <body
+        className="min-h-screen bg-ink text-cream antialiased"
+        suppressHydrationWarning
+      >
+        <ThemeProvider>
+          <CartProvider>
+            <Header />
+            <main>{children}</main>
+            <Footer />
+            <CartDrawer />
+          </CartProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

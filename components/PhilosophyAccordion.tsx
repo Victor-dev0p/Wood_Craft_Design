@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { ChevronDown, Heart, Leaf, Spline } from "lucide-react";
 import { philosophy } from "@/lib/data";
-import { cn } from "@/lib/utils";
 
 const icons = {
   leaf: Leaf,
@@ -20,7 +19,11 @@ export default function PhilosophyAccordion() {
         const Icon = icons[item.icon as keyof typeof icons];
         const isOpen = open === item.id;
         return (
-          <div key={item.id} className="hairline overflow-hidden rounded-xl bg-panel">
+          <div
+            key={item.id}
+            className="overflow-hidden rounded-xl border bg-panel"
+            style={{ borderColor: "var(--border)" }}
+          >
             <button
               type="button"
               onClick={() => setOpen(isOpen ? "" : item.id)}
@@ -30,15 +33,20 @@ export default function PhilosophyAccordion() {
                 <span className="grid h-8 w-8 place-items-center rounded-full bg-gold/10 text-gold">
                   <Icon size={15} />
                 </span>
-                <span className="text-sm font-medium text-cream">{item.title}</span>
+                <span className="text-sm font-medium text-cream">
+                  {item.title}
+                </span>
               </span>
               <ChevronDown
                 size={16}
-                className={cn("text-cream-dim transition-transform", isOpen && "rotate-180")}
+                className={`text-cream-dim transition-transform ${isOpen ? "rotate-180" : ""}`}
               />
             </button>
             {isOpen && (
-              <p className="border-t border-line px-5 py-4 text-sm leading-relaxed text-cream-dim">
+              <p
+                className="border-t px-5 py-4 text-sm leading-relaxed text-cream-dim"
+                style={{ borderColor: "var(--border)" }}
+              >
                 {item.body}
               </p>
             )}

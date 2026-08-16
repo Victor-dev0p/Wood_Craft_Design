@@ -5,8 +5,9 @@ import CollectionGrid from "@/components/CollectionGrid";
 import PhilosophyAccordion from "@/components/PhilosophyAccordion";
 import SectionHeading from "@/components/SectionHeading";
 import Testimonials from "@/components/Testimonials";
-import ContactForm from "@/components/ContactForm";
 import { clientStats, stats } from "@/lib/data";
+import CTASection from "@/components/CTASection";
+import Customizer from "@/components/Customizer";
 
 export default function HomePage() {
   return (
@@ -22,9 +23,9 @@ export default function HomePage() {
               Living Timber.
             </h1>
             <p className="mt-6 max-w-md text-sm leading-relaxed text-cream-dim md:text-[15px]">
-              Bespoke, hand-jointed solid wood tables, seating, and storage. Sculpted to
-              preserve deep, natural grains, made with certified sustainable old-growth woods,
-              designed to pass down generations.
+              Bespoke, hand-jointed solid wood tables, seating, and storage.
+              Sculpted to preserve deep, natural grains, made with certified
+              sustainable old-growth woods, designed to pass down generations.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/collection" className="btn-gold">
@@ -63,8 +64,12 @@ export default function HomePage() {
         <div className="mx-auto mt-16 grid max-w-5xl grid-cols-2 gap-y-10 md:grid-cols-4">
           {stats.map((stat) => (
             <div key={stat.label} className="text-center">
-              <p className="font-display text-4xl text-gold md:text-5xl">{stat.value}</p>
-              <p className="mt-2 text-[11px] uppercase tracking-[0.22em] text-cream-dim">{stat.label}</p>
+              <p className="font-display text-4xl text-gold md:text-5xl">
+                {stat.value}
+              </p>
+              <p className="mt-2 text-[11px] uppercase tracking-[0.22em] text-cream-dim">
+                {stat.label}
+              </p>
             </div>
           ))}
         </div>
@@ -77,24 +82,51 @@ export default function HomePage() {
           accent="Portfolio"
           copy="Explore our diverse range of handcrafted solid wood pieces spanning dining, seating, and storage — each made to order in our Portland atelier."
         />
-        <h3 className="mt-14 text-center font-display text-3xl">Featured Collection</h3>
+        <h3 className="mt-14 text-center font-display text-3xl">
+          Featured Collection
+        </h3>
         <div className="mx-auto mt-8 max-w-7xl px-5 md:px-8">
           <CollectionGrid featuredOnly />
         </div>
       </section>
 
-      <section className="border-t border-line bg-[#16110e] py-20 md:py-24">
+      <section className="relative overflow-hidden py-24">
+        <Image
+          src="/images/wood-grain.jpg"
+          alt=""
+          fill
+          className="object-cover opacity-25"
+        />
+        <div className="absolute inset-0 bg-linear-to-b from-[#c9a57a]/70 via-[#b08a5c]/75 to-[#1a1410]" />
+        <div className="relative mx-auto max-w-2xl px-5 text-center">
+          <h2 className="font-display text-4xl md:text-5xl">
+            Ready to Transform Your Space?
+          </h2>
+          <p className="mt-3 text-sm text-ink/80">
+            Let’s create something beautiful together.
+          </p>
+          <Link
+            href="/quote"
+            className="mt-8 inline-flex rounded-md bg-cream px-6 py-3 text-[12px] uppercase tracking-[0.18em] text-[#92755b]"
+          >
+            Get a Free Quote
+          </Link>
+        </div>
+      </section>
+      <Customizer />
+      <section className="border-t border-line bg-[#1d1510] py-20 md:py-24">
         <div className="mx-auto grid max-w-7xl items-start gap-12 px-5 md:grid-cols-2 md:px-8">
           <div>
-            <p className="eyebrow">An Absolute Standard</p>
-            <h2 className="mt-4 font-display text-4xl leading-tight md:text-5xl">
+            <p className="eyebrow ">An Absolute Standard</p>
+            <h2 className="mt-4 font-display text-4xl leading-tight md:text-5xl text-[#ffffff]">
               Our Architectural Wood
               <br />
               Philosophy
             </h2>
-            <p className="mt-5 max-w-md text-sm leading-relaxed text-cream-dim">
-              Wood has a memory. It contracts and expands with climate, seasons, and breaths of
-              the room. We treat wood not as dead timber, but as a responsive medium.
+            <p className="mt-5 max-w-md text-sm leading-relaxed text-[#ffffff]">
+              Wood has a memory. It contracts and expands with climate, seasons,
+              and breaths of the room. We treat wood not as dead timber, but as
+              a responsive medium.
             </p>
           </div>
           <PhilosophyAccordion />
@@ -115,36 +147,16 @@ export default function HomePage() {
             {clientStats.map((stat) => (
               <div key={stat.label} className="text-center">
                 <p className="font-display text-4xl">{stat.value}</p>
-                <p className="mt-1 text-[11px] uppercase tracking-[0.18em] opacity-70">{stat.label}</p>
+                <p className="mt-1 text-[11px] uppercase tracking-[0.18em] opacity-70">
+                  {stat.label}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="relative overflow-hidden py-24">
-        <Image src="/images/wood-grain.jpg" alt="" fill className="object-cover opacity-25" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#c9a57a]/70 via-[#b08a5c]/75 to-[#1a1410]" />
-        <div className="relative mx-auto max-w-2xl px-5 text-center">
-          <h2 className="font-display text-4xl md:text-5xl">Ready to Transform Your Space?</h2>
-          <p className="mt-3 text-sm text-ink/80">Let’s create something beautiful together.</p>
-          <Link href="/quote" className="mt-8 inline-flex rounded-md bg-cream px-6 py-3 text-[12px] uppercase tracking-[0.18em] text-[#2a1c10]">
-            Get a Free Quote
-          </Link>
-        </div>
-      </section>
-
-      <section id="contact" className="border-t border-line py-20 md:py-24">
-        <SectionHeading
-          eyebrow="Get in Touch"
-          title="Contact"
-          accent="Us"
-          copy="Have a question about a piece, want to discuss a custom commission, or just want to say hello? We’d love to hear from you."
-        />
-        <div className="mx-auto mt-12 max-w-3xl px-5 md:px-8">
-          <ContactForm />
-        </div>
-      </section>
+      <CTASection />
     </>
   );
 }

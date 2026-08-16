@@ -40,7 +40,7 @@ export default function QuoteForm() {
         <Field label="Phone" name="phone" placeholder="Optional" />
         <label className="block">
           <span className="mb-1.5 block text-[11px] uppercase tracking-[0.18em] text-cream-dim">Category</span>
-          <select name="category" required className="input-field !pl-3">
+          <select name="category" required className="input-field pl-3!">
             {categories.map((c) => (
               <option key={c}>{c}</option>
             ))}
@@ -48,7 +48,7 @@ export default function QuoteForm() {
         </label>
         <label className="block">
           <span className="mb-1.5 block text-[11px] uppercase tracking-[0.18em] text-cream-dim">Preferred Wood</span>
-          <select name="wood" required className="input-field !pl-3">
+          <select name="wood" required className="input-field pl-3!">
             {woods.map((c) => (
               <option key={c}>{c}</option>
             ))}
@@ -56,7 +56,7 @@ export default function QuoteForm() {
         </label>
         <label className="block">
           <span className="mb-1.5 block text-[11px] uppercase tracking-[0.18em] text-cream-dim">Budget</span>
-          <select name="budget" className="input-field !pl-3">
+          <select name="budget" className="input-field pl-3!">
             {budgets.map((c) => (
               <option key={c}>{c}</option>
             ))}
@@ -69,7 +69,7 @@ export default function QuoteForm() {
         <textarea
           name="notes"
           placeholder="Tell us about the room, the wood you love, and how the piece should live."
-          className="input-field !pl-3"
+          className="input-field pl-3!"
         />
       </label>
       <button type="submit" disabled={status === "loading"} className="btn-gold mt-6">
@@ -98,7 +98,7 @@ function Field({
   return (
     <label className="mt-4 block first:mt-0">
       <span className="mb-1.5 block text-[11px] uppercase tracking-[0.18em] text-cream-dim">{label}</span>
-      <input name={name} type={type} required={required} placeholder={placeholder} className="input-field !pl-3" />
+      <input name={name} type={type} required={required} placeholder={placeholder} className="input-field pl-3!" />
     </label>
   );
 }

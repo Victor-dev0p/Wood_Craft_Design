@@ -4,20 +4,54 @@
   --font-display: "Cormorant Garamond", "Times New Roman", serif;
   --font-sans: "Outfit", "Helvetica Neue", system-ui, sans-serif;
 
-  --color-ink: #1a1410;
-  --color-ink-soft: #2a221c;
-  --color-panel: #241c16;
-  --color-panel-2: #2c231c;
-  --color-line: rgba(232, 216, 196, 0.1);
-  --color-line-strong: rgba(232, 216, 196, 0.18);
-  --color-cream: #f4eadc;
-  --color-cream-dim: #d9cbb8;
-  --color-sand: #c4a882;
-  --color-gold: #c9a57a;
-  --color-gold-deep: #b08a5c;
+  /* Primary / Secondary */
+  --color-primary: var(--accent);
+  --color-secondary: var(--text-muted);
+
+  /* Semantic surface & text colors — values swap via html.dark */
+  --color-ink: var(--bg-page);
+  --color-cream: var(--text-main);
+  --color-panel: var(--bg-card);
+  --color-panel-2: var(--bg-card-2);
+  --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
+  --color-cream-dim: var(--text-muted);
+  --color-sand: var(--accent-deep);
+  --color-gold: var(--accent);
+  --color-gold-deep: var(--accent-deep);
   --color-blush: #e8c9a8;
 
-  --shadow-soft: 0 24px 60px -28px rgba(0, 0, 0, 0.55);
+  --shadow-soft: var(--shadow);
+}
+
+/* Light mode defaults */
+:root {
+  color-scheme: light;
+  --bg-page: #ddd2c1;
+  --bg-card: #faf8f4;
+  --bg-card-2: #f0ebe3;
+  --text-main: #2a221c;
+  --text-muted: #5c5048;
+  --accent: #9a734d;
+  --accent-deep: #7a5a3a;
+  --border: rgba(42, 34, 28, 0.12);
+  --border-strong: rgba(42, 34, 28, 0.2);
+  --shadow: 0 24px 60px -28px rgba(0, 0, 0, 0.15);
+}
+
+/* Dark mode overrides */
+html.dark {
+  color-scheme: dark;
+  --bg-page: #1a1410;
+  --bg-card: #241c16;
+  --bg-card-2: #2c231c;
+  --text-main: #f4eadc;
+  --text-muted: #d9cbb8;
+  --accent: #c9a57a;
+  --accent-deep: #b08a5c;
+  --border: rgba(232, 216, 196, 0.1);
+  --border-strong: rgba(232, 216, 196, 0.18);
+  --shadow: 0 24px 60px -28px rgba(0, 0, 0, 0.55);
 }
 
 html {
@@ -25,16 +59,16 @@ html {
 }
 
 body {
-  background: var(--color-ink);
-  color: var(--color-cream);
+  background: var(--bg-page);
+  color: var(--text-main);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
 ::selection {
-  background: color-mix(in oklab, var(--color-gold) 50%, transparent);
-  color: var(--color-ink);
+  background: color-mix(in oklab, var(--accent) 50%, transparent);
+  color: var(--text-main);
 }
 
 .font-display {
@@ -44,20 +78,20 @@ body {
 
 .grid-overlay {
   background-image:
-    linear-gradient(to right, rgba(232, 216, 196, 0.045) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(232, 216, 196, 0.045) 1px, transparent 1px);
+    linear-gradient(to right, color-mix(in oklab, var(--text-main) 4.5%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--text-main) 4.5%, transparent) 1px, transparent 1px);
   background-size: 20% 100%, 100% 120px;
 }
 
 .hairline {
-  box-shadow: inset 0 0 0 1px var(--color-line);
+  box-shadow: inset 0 0 0 1px var(--border);
 }
 
 .input-field {
   width: 100%;
-  background: #1b1511;
-  border: 1px solid var(--color-line-strong);
-  color: var(--color-cream);
+  background: var(--bg-card-2);
+  border: 1px solid var(--border-strong);
+  color: var(--text-main);
   border-radius: 0.55rem;
   padding: 0.7rem 0.9rem 0.7rem 2.4rem;
   font-size: 0.9rem;
@@ -66,12 +100,12 @@ body {
 }
 
 .input-field:focus {
-  border-color: color-mix(in oklab, var(--color-gold) 70%, transparent);
-  box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-gold) 16%, transparent);
+  border-color: color-mix(in oklab, var(--accent) 70%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 16%, transparent);
 }
 
 .input-field::placeholder {
-  color: color-mix(in oklab, var(--color-cream-dim) 55%, transparent);
+  color: color-mix(in oklab, var(--text-muted) 55%, transparent);
 }
 
 textarea.input-field {
@@ -83,7 +117,7 @@ textarea.input-field {
 .gold-rule {
   width: 3.25rem;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
   margin-inline: auto;
 }
 
@@ -92,7 +126,7 @@ textarea.input-field {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: var(--color-gold);
+  background: var(--accent);
   color: #2a1c10;
   font-size: 0.7rem;
   letter-spacing: 0.16em;
@@ -113,27 +147,27 @@ textarea.input-field {
   justify-content: center;
   gap: 0.5rem;
   background: transparent;
-  color: var(--color-cream);
+  color: var(--text-main);
   font-size: 0.7rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   font-weight: 500;
   padding: 0.8rem 1.25rem;
   border-radius: 0.45rem;
-  border: 1px solid var(--color-line-strong);
+  border: 1px solid var(--border-strong);
   transition: border-color 0.2s ease, background 0.2s ease;
 }
 
 .btn-ghost:hover {
-  border-color: var(--color-gold);
-  background: color-mix(in oklab, var(--color-gold) 8%, transparent);
+  border-color: var(--accent);
+  background: color-mix(in oklab, var(--accent) 8%, transparent);
 }
 
 .eyebrow {
   font-size: 0.68rem;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: color-mix(in oklab, var(--color-gold) 80%, var(--color-cream));
+  color: color-mix(in oklab, var(--accent) 80%, var(--text-main));
 }
 
 .hide-scrollbar::-webkit-scrollbar {
