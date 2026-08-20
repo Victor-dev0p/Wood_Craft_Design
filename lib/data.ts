@@ -1,3 +1,4 @@
+// lib/data.ts
 export type Category = "dining" | "seating" | "storage" | "tables";
 
 export type Piece = {

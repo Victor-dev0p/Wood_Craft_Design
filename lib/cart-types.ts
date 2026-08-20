@@ -1,3 +1,4 @@
+// lib/cart-types.ts
 import type { Piece } from "./data";
 
 export interface CartItem {

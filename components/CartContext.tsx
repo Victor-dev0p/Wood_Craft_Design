@@ -1,3 +1,4 @@
+// components/CartContext.tsx
 "use client";
 
 import {
@@ -21,34 +22,38 @@ interface CartContextType {
   isOpen: boolean;
   openCart: () => void;
   closeCart: () => void;
+  isHydrated: boolean;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
-
 const STORAGE_KEY = "wood_craft_cart";
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  // Lazy initializer reads localStorage ONCE on mount
-  const [cart, setCart] = useState<CartItem[]>(() => {
-    if (typeof window === "undefined") return [];
+  // Starts empty on server AND on first client render — always matches, no mismatch possible
+  const [cart, setCart] = useState<CartItem[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  // Load from localStorage only after mount (client-only, runs after hydration completes)
+  useEffect(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      return raw ? (JSON.parse(raw) as CartItem[]) : [];
+      if (raw) setCart(JSON.parse(raw));
     } catch {
-      return [];
+      // ignore corrupt storage
     }
-  });
+    setIsHydrated(true);
+  }, []);
 
-  const [isOpen, setIsOpen] = useState(false);
-
-  // This effect only writes to localStorage — NO setState inside
+  // Persist on every change, but skip the very first run (would overwrite storage with [])
   useEffect(() => {
+    if (!isHydrated) return;
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
     } catch {
       // ignore
     }
-  }, [cart]);
+  }, [cart, isHydrated]);
 
   const addItem = useCallback((piece: Piece, wood?: string, size?: string) => {
     const id = `${piece.slug}${wood ? `-${wood}` : ""}${size ? `-${size}` : ""}`;
@@ -59,17 +64,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
           item.id === id ? { ...item, quantity: item.quantity + 1 } : item,
         );
       }
-      return [
-        ...prev,
-        {
-          id,
-          piece,
-          selectedWood: wood,
-          selectedSize: size,
-          price: piece.price,
-          quantity: 1,
-        },
-      ];
+      return [...prev, { id, piece, selectedWood: wood, selectedSize: size, price: piece.price, quantity: 1 }];
     });
     setIsOpen(true);
   }, []);
@@ -93,22 +88,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const clearCart = useCallback(() => setCart([]), []);
-
   const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <CartContext.Provider
-      value={{
-        cart,
-        addItem,
-        removeItem,
-        updateQuantity,
-        clearCart,
-        itemCount,
-        isOpen,
-        openCart: () => setIsOpen(true),
-        closeCart: () => setIsOpen(false),
-      }}
+      value={{ cart, addItem, removeItem, updateQuantity, clearCart, itemCount, isOpen, openCart: () => setIsOpen(true), closeCart: () => setIsOpen(false), isHydrated }}
     >
       {children}
     </CartContext.Provider>
@@ -117,8 +101,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
 export function useCart() {
   const context = useContext(CartContext);
-  if (!context) {
-    throw new Error("useCart must be used within a CartProvider");
-  }
+  if (!context) throw new Error("useCart must be used within a CartProvider");
   return context;
 }

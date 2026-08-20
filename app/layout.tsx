@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CartDrawer from "@/components/CartDrawer";
 import "./globals.css";
+import Script from "next/script";
 
 const display = Cormorant_Garamond({
   subsets: ["latin"],
@@ -37,18 +38,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`${display.variable} ${sans.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang="en" className={`${display.variable} ${sans.variable}`} suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <Script id="theme-init" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
-      <body
-        className="min-h-screen bg-ink text-cream antialiased"
-        suppressHydrationWarning
-      >
+      <body className="min-h-screen bg-ink text-cream antialiased" suppressHydrationWarning>
         <ThemeProvider>
           <CartProvider>
             <Header />

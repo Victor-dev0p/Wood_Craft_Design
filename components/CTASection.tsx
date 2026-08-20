@@ -4,7 +4,7 @@ export default function CTASection() {
   return (
     <section
       className="relative flex min-h-80 items-center bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/cta-workshop.jpg')" }}
+      style={{ backgroundImage: "url('/design1.jpg')" }}
     >
       {/* Always use a dark overlay since the photo is dark — ensures readability in both themes */}
       <div className="absolute inset-0 bg-black/70" />

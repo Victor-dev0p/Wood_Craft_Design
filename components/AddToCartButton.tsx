@@ -1,3 +1,4 @@
+// components/AddToCartButton.tsx
 "use client";
 
 import { ShoppingBag, Check } from "lucide-react";

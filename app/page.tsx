@@ -90,29 +90,25 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden py-24">
-        <Image
-          src="/images/wood-grain.jpg"
-          alt=""
-          fill
-          className="object-cover opacity-25"
-        />
-        <div className="absolute inset-0 bg-linear-to-b from-[#c9a57a]/70 via-[#b08a5c]/75 to-[#1a1410]" />
-        <div className="relative mx-auto max-w-2xl px-5 text-center">
-          <h2 className="font-display text-4xl md:text-5xl">
-            Ready to Transform Your Space?
-          </h2>
-          <p className="mt-3 text-sm text-ink/80">
-            Let’s create something beautiful together.
-          </p>
-          <Link
-            href="/quote"
-            className="mt-8 inline-flex rounded-md bg-cream px-6 py-3 text-[12px] uppercase tracking-[0.18em] text-[#92755b]"
-          >
-            Get a Free Quote
-          </Link>
+      <section className="bg-[url('/design1.jpg')] bg-cover bg-center bg-fixed bg-no-repeat">
+        <div className="bg-black/50 py-24">
+          <div className="relative mx-auto max-w-2xl px-5 text-center text-white">
+            <h2 className="font-display text-4xl md:text-5xl">
+              Ready to Transform Your Space?
+            </h2>
+            <p className="mt-3 text-sm text-white/90">
+              Let’s create something beautiful together.
+            </p>
+            <Link
+              href="/quote"
+              className="mt-8 inline-flex rounded-md bg-cream px-6 py-3 text-[12px] uppercase tracking-[0.18em] text-[#92755b] transition-all hover:bg-white"
+            >
+              Get a Free Quote
+            </Link>
+          </div>
         </div>
       </section>
+      
       <Customizer />
       <section className="border-t border-line bg-[#1d1510] py-20 md:py-24">
         <div className="mx-auto grid max-w-7xl items-start gap-12 px-5 md:grid-cols-2 md:px-8">
