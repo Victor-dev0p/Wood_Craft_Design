@@ -20,9 +20,9 @@ export default function ContactPage() {
       <div className="mx-auto mt-14 grid max-w-6xl gap-10 px-5 md:grid-cols-[0.8fr_1.2fr] md:px-8">
         <div className="space-y-5">
           {[
-            { icon: Phone, label: "Studio", value: "+1 (503) 555-0147" },
+            { icon: Phone, label: "Studio", value: "+234 (806) 250-4545" },
             { icon: Mail, label: "Email", value: "studio@woodcraftdesign.com" },
-            { icon: MapPin, label: "Atelier", value: "104 Woodsmith Lane, Portland, OR 97201" },
+            { icon: MapPin, label: "Atelier", value: "34 Crescent, 3rd Avenue, Gwarinpa, Abuja" },
           ].map((item) => (
             <div key={item.label} className="hairline flex gap-4 rounded-2xl bg-panel p-5">
               <span className="grid h-10 w-10 place-items-center rounded-full bg-gold/10 text-gold">

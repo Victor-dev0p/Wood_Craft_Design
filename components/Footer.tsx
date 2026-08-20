@@ -68,7 +68,7 @@ export default function Footer() {
           <p className="eyebrow">Contact Info</p>
           <ul className="mt-5 space-y-3 text-sm text-cream-dim">
             <li className="flex items-center gap-2.5">
-              <Phone size={14} className="text-gold" /> +1 (503) 555-0147
+              <Phone size={14} className="text-gold" /> +234 (806) 250-4545
             </li>
             <li className="flex items-center gap-2.5">
               <Mail size={14} className="text-gold" />{" "}
@@ -76,7 +76,7 @@ export default function Footer() {
             </li>
             <li className="flex items-start gap-2.5">
               <MapPin size={14} className="mt-0.5 text-gold" />
-              104 Woodsmith Lane, Portland, OR 97201
+              34 Crescent, 3rd Avenue, Gwarinpa, Abuja
             </li>
           </ul>
           <p className="eyebrow mt-8">Stay Updated</p>
